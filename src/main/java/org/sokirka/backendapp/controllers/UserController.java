@@ -1,48 +1,41 @@
 package org.sokirka.backendapp.controllers;
 
-import org.sokirka.backendapp.dao.RoleDao;
 import org.sokirka.backendapp.dao.UserDao;
-import org.sokirka.backendapp.entities.Role;
 import org.sokirka.backendapp.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Eugine Sokirka
  */
-@Controller
+@RestController
+@RequestMapping(value = "/user/{id}")
 public class UserController {
 
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private RoleDao roleDao;
+    @RequestMapping(method = RequestMethod.GET)
+    public User getUser(@PathVariable("id") String id) {
+        return userDao.findOne(Long.parseLong(id));
+    }
 
-    @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public User addUser(@RequestParam("name") String userName,
-                        @RequestParam("pass") String passWord,
-                        @RequestParam("isActive") int isActive) {
-
-        List<Role> roles = new ArrayList<>();
-        Role role = new Role();
-        role.setName("Admin");
-        roleDao.save(role);
-        roles.add(role);
-
-        User user = new User();
-        user.setUserName(userName);
-        user.setPassWord(passWord);
-        user.setIsActive(isActive == 1);
-        user.setRoles(roles);
-
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void newUser(@RequestBody User user) {
         userDao.save(user);
+    }
 
-        return user;
+    @RequestMapping(method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@RequestBody User user) {
+        userDao.save(user);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@RequestBody User user) {
+        userDao.delete(user);
     }
 }
