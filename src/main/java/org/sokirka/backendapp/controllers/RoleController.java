@@ -6,19 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
 @RestController
-@RequestMapping(value = "/role/{id}")
+@RequestMapping(value = "/role")
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Role getRole(@PathVariable("id") String id) {
-        return roleService.getById(Long.parseLong(id));
+    public List<Role> getAllRoles() {
+        return roleService.getAllRoles();
     }
 
     @RequestMapping(method = RequestMethod.POST)

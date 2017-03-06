@@ -2,17 +2,18 @@ package org.sokirka.backendapp.services;
 
 import org.sokirka.backendapp.entities.User;
 
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
 public interface UserService {
 
     /**
-     * Returns user by id
-     * @param id unique identificator
-     * @return user entity
+     * Returns all users from DB
+     * @return list of users
      */
-    User getById(Long id);
+    List<User> getAllUsers();
 
     /**
      * Saves user entity to DB

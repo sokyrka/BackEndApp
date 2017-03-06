@@ -2,17 +2,18 @@ package org.sokirka.backendapp.services;
 
 import org.sokirka.backendapp.entities.Role;
 
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
 public interface RoleService {
 
     /**
-     * Returns role by id
-     * @param id unique identificator
-     * @return role entity
+     * Returns all roles from DB
+     * @return list of roles
      */
-    Role getById(Long id);
+    List<Role> getAllRoles();
 
     /**
      * Saves role entity to DB

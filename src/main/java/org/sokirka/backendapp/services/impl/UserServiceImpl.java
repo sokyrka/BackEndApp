@@ -6,6 +6,9 @@ import org.sokirka.backendapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
@@ -16,8 +19,10 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User getById(Long id) {
-        return userDao.findOne(id);
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        userDao.findAll().forEach(userList::add);
+        return userList;
     }
 
     @Override

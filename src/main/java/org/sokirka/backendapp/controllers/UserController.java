@@ -6,19 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
 @RestController
-@RequestMapping(value = "/user/{id}")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public User getUser(@PathVariable("id") String id) {
-        return userService.getById(Long.parseLong(id));
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -6,6 +6,9 @@ import org.sokirka.backendapp.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Eugine Sokirka
  */
@@ -16,8 +19,10 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
     @Override
-    public Role getById(Long id) {
-        return roleDao.findOne(id);
+    public List<Role> getAllRoles() {
+        List<Role> roleList = new ArrayList<>();
+        roleDao.findAll().forEach(roleList::add);
+        return roleList;
     }
 
     @Override
