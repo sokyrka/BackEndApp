@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Eugine Sokirka
  */
 public interface UserDao extends CrudRepository<User, Long> {
+
+    User findByUserName(String userName);
 }

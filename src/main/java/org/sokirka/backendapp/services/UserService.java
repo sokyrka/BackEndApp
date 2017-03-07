@@ -10,6 +10,13 @@ import java.util.List;
 public interface UserService {
 
     /**
+     * Returns user by name
+     * @param userName input parameter
+     * @return user entity
+     */
+    User getByName(String userName);
+
+    /**
      * Returns all users from DB
      * @return list of users
      */
@@ -32,4 +39,11 @@ public interface UserService {
      * @param user user entity
      */
     void delete(User user);
+
+    /**
+     * Authenticates user
+     * @param user input parameter
+     * @return boolean value
+     */
+    Boolean authenticate(User user);
 }

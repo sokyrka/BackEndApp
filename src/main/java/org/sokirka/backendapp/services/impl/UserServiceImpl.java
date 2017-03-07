@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    public User getByName(String userName) {
+        return userDao.findByUserName(userName);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         userDao.findAll().forEach(userList::add);
@@ -38,5 +43,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(User user) {
         userDao.delete(user);
+    }
+
+    @Override
+    public Boolean authenticate(User user) {
+        User userInDB = getByName(user.getUserName());
+        return userInDB.getPassWord().equals(user.getPassWord());
     }
 }
