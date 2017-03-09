@@ -13,13 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_Name")
+    @Column(name = "userName")
     private String userName;
 
-    @Column(name = "pass_Word")
+    @Column(name = "passWord")
     private String passWord;
 
-    @Column(name = "is_Active")
+    @Column(name = "isActive")
     private boolean isActive;
 
     @OneToMany

@@ -4,10 +4,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.sokirka.backendapp.entities.Role;
 import org.sokirka.backendapp.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import java.util.UUID;
 
 /**
  * @author Eugine Sokirka
@@ -27,7 +30,7 @@ public class JwtService {
 
             User user = new User();
             user.setUserName(body.getSubject());
-            user.setPassWord((String) body.get("role"));
+            user.setPassWord((String) body.get("passWord"));
 
             return user;
         } catch (JwtException | ClassCastException e) {
@@ -36,10 +39,14 @@ public class JwtService {
     }
 
     public String generateToken(User user) {
-        Claims claims = Jwts.claims().setSubject(user.getUserName());
+        Date date = new Date();
+        long time = date.getTime() + 60000l;
+        Claims claims = Jwts
+                .claims()
+                .setSubject(user.getUserName())
+                .setExpiration(new Date(time));
+        claims.put("id", UUID.randomUUID().toString());
         claims.put("passWord", user.getPassWord());
-        claims.put("userId", user.getId() + "");
-        claims.put("role", new Role());
 
         return Jwts.builder()
                 .setClaims(claims)

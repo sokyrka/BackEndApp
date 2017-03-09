@@ -31,7 +31,7 @@ public class AuthController {
 
     @SuppressWarnings("unused")
     private static class UserLogin {
-        private String userName;
-        private String pass;
+        public String userName;
+        public String pass;
     }
 }

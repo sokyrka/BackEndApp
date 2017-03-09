@@ -48,6 +48,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean authenticate(User user) {
         User userInDB = getByName(user.getUserName());
+        if (userInDB == null)
+            return false;
         return userInDB.getPassWord().equals(user.getPassWord());
     }
 }
